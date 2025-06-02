@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guard/roles.guard';
 import { Role } from './enums/rol.enum';
+import { Auth } from './decorators/auth.decorator';
 
 interface RequestWithUser extends Request {
     user: {
@@ -36,9 +37,18 @@ export class AuthController {
     }
 
     //Ruta protegida con guard
+    /*
     @Get('profile')
     @Roles(Role.ADMIN) // Solo para admin
     @UseGuards(AuthGuard, RolesGuard)
+    profile(
+        @Req() req: RequestWithUser,
+    ) {
+        return this.authService.profile(req.user);
+    }
+    */ 
+    @Get('profile')
+    @Auth(Role.ADMIN) // Solo para ADMINS
     profile(
         @Req() req: RequestWithUser,
     ) {
