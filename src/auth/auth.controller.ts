@@ -6,7 +6,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { Request } from 'express';
 import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guard/roles.guard';
-import { Role } from './enums/rol.enum';
+import { Role } from '../common/enums/rol.enum';
 import { Auth } from './decorators/auth.decorator';
 
 interface RequestWithUser extends Request {
@@ -49,9 +49,7 @@ export class AuthController {
     */ 
     @Get('profile')
     @Auth(Role.ADMIN) // Solo para ADMINS
-    profile(
-        @Req() req: RequestWithUser,
-    ) {
+    profile(@Req() req: RequestWithUser,) {
         return this.authService.profile(req.user);
     }
     

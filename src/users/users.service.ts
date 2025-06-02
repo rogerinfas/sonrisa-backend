@@ -62,7 +62,13 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string): Promise<User | null> {
-  return this.userRepository.findOne({ where: { username } });
-}
+    return this.userRepository.findOne({ where: { username } });
+  }
+  async findOneByUsernameWhitPassword(username: string){
+    return this.userRepository.findOne({
+      where: { username },
+      select: ['id', 'username', 'password', 'role'] // Solo selecciona id, username y password
+    });
+  }
 
 }
