@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
       port: 3306,
       username: 'root',
       password: '147895326',
-      database: 'test_01',
+      database: 'sonrisa',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, //shouldn't be used in production 
       }),
