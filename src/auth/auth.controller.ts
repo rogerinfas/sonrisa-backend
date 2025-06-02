@@ -4,6 +4,9 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './guard/auth.guard';
 import { Request } from 'express';
+import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from './guard/roles.guard';
+import { Role } from './enums/rol.enum';
 
 interface RequestWithUser extends Request {
     user: {
@@ -34,7 +37,8 @@ export class AuthController {
 
     //Ruta protegida con guard
     @Get('profile')
-    @UseGuards(AuthGuard)
+    @Roles(Role.ADMIN) // Solo para admin
+    @UseGuards(AuthGuard, RolesGuard)
     profile(
         @Req() req: RequestWithUser,
     ) {
