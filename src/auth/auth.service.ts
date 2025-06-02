@@ -28,7 +28,7 @@ export class AuthService {
             throw new UnauthorizedException('Invalid password');
         }
         // Ahora token JWT
-        const payload = { username: user.username};
+        const payload = { username: user.username, role: user.role };
         const token = await this.jwtService.signAsync(payload);
         return {
             token,

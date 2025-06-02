@@ -1,8 +1,16 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './guard/auth.guard';
+import { Request } from 'express';
+
+interface RequestWithUser extends Request {
+    user?: {
+        username: string;
+        role: string;
+    };
+}
 
 @Controller('auth')
 export class AuthController {
@@ -27,8 +35,10 @@ export class AuthController {
     //Ruta protegida con guard
     @Get('profile')
     @UseGuards(AuthGuard)
-    profile() {
-        return 'profile';
+    profile(
+        @Req() req: RequestWithUser,
+    ) {
+        return req.user;
     }
     
 }
