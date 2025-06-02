@@ -6,7 +6,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { Request } from 'express';
 
 interface RequestWithUser extends Request {
-    user?: {
+    user: {
         username: string;
         role: string;
     };
@@ -38,7 +38,7 @@ export class AuthController {
     profile(
         @Req() req: RequestWithUser,
     ) {
-        return req.user;
+        return this.authService.profile(req.user);
     }
     
 }

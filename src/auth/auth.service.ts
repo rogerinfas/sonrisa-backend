@@ -34,4 +34,13 @@ export class AuthService {
             token,
         };
     }
+
+    async profile({username, role}: { username : string; role : string }) {
+        /*
+        if (role !== 'admin') {
+            throw new UnauthorizedException('You are not an admin');
+        }
+        */
+        return this.usersService.findOneByUsername(username);
+    }
 }
