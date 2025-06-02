@@ -60,4 +60,9 @@ export class UsersService {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
   }
+
+  async findOneByUsername(username: string): Promise<User | null> {
+  return this.userRepository.findOne({ where: { username } });
+}
+
 }
