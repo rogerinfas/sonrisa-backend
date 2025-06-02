@@ -48,7 +48,7 @@ export class AuthController {
     }
     */ 
     @Get('profile')
-    @Auth(Role.ADMIN) // Solo para ADMINS
+    @Auth(Role.USER) // Solo para users
     profile(@Req() req: RequestWithUser,) {
         return this.authService.profile(req.user);
     }
