@@ -12,7 +12,7 @@ export class User {
     @Column({select: false})
     password: string;
 
-    @Column({type:'enum',  default: Role.USER, enum: Role })
+    @Column({type:'enum',  default: Role.GUEST, enum: Role })
     role: string;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })

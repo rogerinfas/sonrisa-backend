@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { AuthGuard } from 'src/auth/guard/auth.guard';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { Role } from '../common/enums/rol.enum';
 
+@Auth(Role.USER) // Asegurarse de que el guard esté importado y configurado correctamente
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
@@ -14,7 +16,6 @@ export class TasksController {
   }
 
   @Get()
-  @UseGuards(AuthGuard)
   findAll() {
     return this.tasksService.findAll();
   }
